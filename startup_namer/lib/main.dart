@@ -4,22 +4,39 @@ import 'package:english_words/english_words.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random(); // Add this line.
     return MaterialApp(
       title: 'Welcome to Flutter',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome to Flutter'),
+          title: const Text('Welcome to Flutter'),
         ),
-        body: Center(
-          // Drop the const, and
-          //child: Text('Hello World'),     // Replace this text...
-          child: Text(wordPair.asPascalCase,
-              style: TextStyle(fontSize: 50)), // With this text.
+        body: const Center(
+          child: RandomWords(),
         ),
       ),
     );
+  }
+}
+
+class RandomWords extends StatefulWidget {
+  const RandomWords({Key? key}) : super(key: key);
+
+  @override
+  _RandomWordsState createState() => _RandomWordsState();
+}
+
+class _RandomWordsState extends State<RandomWords> {
+  @override
+  final _suggestions = <WordPair>[]; 
+  final _biggerFont = const TextStyle(fontSize: 18);
+  Widget build(BuildContext context) {
+    final wordPair = WordPair.random();
+    return Text(wordPair.asPascalCase, style: const TextStyle(fontSize: 50));
+  
+  
   }
 }
